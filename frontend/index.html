@@ -1,0 +1,7 @@
+<h1>Pokemon:</h1>
+<p id= 'pokemon'></p>
+<script>
+    fetch('http://localhost:3000/pokemon/85')
+    .then(response => response.json())
+    .then(json => document.getElementById('pokemon').innerHTML= `${json.name} ${json.pok_type} ${json.dex_num}`);
+</script>
