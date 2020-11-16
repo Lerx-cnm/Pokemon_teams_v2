@@ -45,6 +45,27 @@ class Pokemon{
 
     strengthlist(){
 
+        let strengthash = { 
+            "Normal": [],
+            "Fire": ["Grass", "Ice", "Bug"],
+            "Water": ["Fire", "Ground", "Rock"],
+            "Electric": ["Water", "Flying"],
+            "Grass": ["Water", "Ground", "Rock"],
+            "Ice": ["Grass", "Rock", "Flying"],
+            "Fighting": ["Normal", "Ice", "Dark"],
+            "Poison": ["Grass"],
+            "Ground": ["Fire", "Electricity", "Poison"],
+            "Flying": ["Grass", "Fighting", "Bug"],
+            "Psychic": ["Fighting", "Poison"],
+            "Bug": ["Grass", "Psychic"],
+            "Rock": ["Fire", "Ice", "Flying"],
+            "Ghost": ["Psychic", "Ghost"],
+            "Dark": ["Psychic", "Ghost"],
+            "Dragon": ["Dragon"]
+        }
+        let strengths = strengthash[`${this.type}`];
+        return strengths;
+
     }
 }
 

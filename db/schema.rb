@@ -10,23 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 3) do
 
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
     t.string "pok_type"
     t.integer "dex_num"
+    t.integer "weakness_id"
+    t.integer "strength_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.string "pokemon_1"
-    t.string "pokemon_2"
-    t.string "pokemon_3"
-    t.string "team_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "strengths", force: :cascade do |t|
+    t.string "main_type"
+    t.string "stre1"
+    t.string "stre2"
+  end
+
+  create_table "weaknesses", force: :cascade do |t|
+    t.string "main_type"
+    t.string "weak1"
+    t.string "weak2"
   end
 
 end
