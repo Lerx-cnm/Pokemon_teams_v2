@@ -2,11 +2,11 @@
    
    
    @strengthash = { 
-    "Normal": ["", "", ""],
+    "Grass": ["Water", "Ground", "Rock"],
     "Fire": ["Grass", "Ice", "Bug"],
     "Water": ["Fire", "Ground", "Rock"],
+    "Normal": ["", "", ""],
     "Electric": ["Water", "Flying", ""],
-    "Grass": ["Water", "Ground", "Rock"],
     "Ice": ["Grass", "Rock", "Flying"],
     "Fighting": ["Normal", "Ice", "Dark"],
     "Poison": ["Grass", "", ""],
