@@ -3,18 +3,12 @@
 .then(json => document.getElementById('pokemon').innerHTML= `${json.name} ${json.pok_type} ${json.dex_num}
 </br><img src='https://img.pokemondb.net/sprites/bank/normal/${json.name.toLowerCase()}.png' alt=${json.name}>`);*/
 
-//json.forEach(json => document.getElementById('pokelist').innerHTML += `<li id=${json.dex_num}>${json.name}</li>`)
-
-
-
-console.log('test1');
 document.addEventListener("DOMContentLoaded", event => {
     fetchPokemon()
 });
 
 
 function fetchPokemon() {
-    console.log("Which gets called first?")
    fetch('http://localhost:3000/pokemon')
   .then(response => response.json())
   .then(json => {
@@ -25,15 +19,21 @@ function fetchPokemon() {
 
 function displayPokemon(pokemonArr) {
       pokemonArr.forEach(json => { 
-          document.getElementById('pokelist').innerHTML += `<li id=${json.dex_num}>${json.name}</li>`
+          document.getElementById('pokelist').innerHTML += `<li id=${json.dex_num} class=${json.pok_type}>${json.name}</li>`
       })
       addListenersToNode()
+      createMenu()
+}
+
+function createMenu(){
+
 }
 
 function addListenersToNode() {
     document.querySelectorAll("li").forEach(node => {
         node.addEventListener("click", createDomelements)
     })
+
 }
 
 function createDomelements(e) {
@@ -46,13 +46,15 @@ function createDomelements(e) {
     .then(response => response.json())
     .then(json => {
 
+
+
         document.querySelector('.container').innerHTML = ""
 
-        let pokemon = document.createElement('section');
         let h2 = document.createElement("h2");
         let type = document.createElement("p")
         let dex = document.createElement("p");
         let pic = document.createElement('img');
+        let button = document.createElement('button');
 
         h2.textContent = json["name"];
         h2.className = 'header'
@@ -64,6 +66,8 @@ function createDomelements(e) {
         pic.setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${("000" + json["dex_num"]).slice(-3)}.png`)
         pic.setAttribute('width', "350")
         pic.className = 'picture'
+        button.className = 'myButton'
+        button.textContent = "Add To Team"
 
         let div = document.querySelector('.container')
         div.style.backgroundColor = "white";
@@ -72,7 +76,9 @@ function createDomelements(e) {
             document.querySelector('.container').appendChild(type);
             document.querySelector('.container').appendChild(dex);
             div.appendChild(pic);
+            div.appendChild(button);
             selectBackground(json["pok_type"])
+            addButtonListener(json)
         }
     }) 
 }
@@ -108,7 +114,51 @@ function selectBackground(type){
     }
 }
 
+function addButtonListener(json){
+    let button = document.getElementsByClassName('myButton')
+    let team = document.getElementById('userlist')
+    let teamlist = document.getElementsByClassName('userteamlist')
+    button[0].addEventListener('click', () => {
+        if(teamlist.length != 3 ){
+        let pokemon = new Pokemon(json.name, json.pok_type, json.dex_num)
+        document.getElementById(pokemon.dex_num).hidden = true;
+        document.getElementsByClassName('container')[0].innerHTML = ""
+        team.innerHTML += `<li id=${pokemon.dex_num} class=userteamlist>${pokemon.name}</li>`
+        pokemon.weaknesses
+        removeListener(pokemon.dex_num)
+        addTeamButton()
+        }else{
+            alert("You have reached the max limit of 3 Pokemon")
+        }
+      })
+}
 
+function removeListener(pokemon){
+    document.querySelectorAll(".userteamlist").forEach(node => {
+        node.addEventListener("click", () => {
+            node.remove()
+            document.getElementById(node.id).hidden = false;
+            
+        })
+    })
+}
+
+function addTeamButton(){
+    let button = document.createElement('button')
+    button.className = 'teambutton'
+    button.textContent = "Submit Team"
+    if(!document.getElementsByClassName('teambutton')[0]){
+    document.getElementById('title').appendChild(button)
+    }
+
+    button.addEventListener('click', () => {
+        if(document.getElementsByClassName('userteamlist').length < 3){
+            alert("Please select three pokemon")
+        }else{
+           alert("I worked")     
+        }
+    })
+}
   
 
 

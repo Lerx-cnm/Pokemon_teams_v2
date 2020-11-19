@@ -4,10 +4,13 @@
   <meta name='description' content = 'Team Creator'>
   <link rel='stylesheet' href='style.css'>
 </head>
-
-
-
-<div class = 'main'><h2>Your current team:</h2>
+<header>
+  <label>Choose a Pokemon Type:</label>
+  <select name = 'Pokemon_Type' id='pokemon_type'>
+  </select>
+</header>
+<div class = 'main'><h2 class='header' id='title'>Your current team:</h2>
+  <ul style= 'list-style-type: none' id='userlist'></ul>
   <h1>Pokemon:</h1>
   <ul id='teamlist'></ul>
   <p id= 'pokemon'></p>
@@ -16,8 +19,9 @@
   <div class="container">
   </div>
 </div>
-<script src='src/index.js'></script>
 <script src='src/pokemon.js'></script>
+<script src='src/index.js'></script>
+
 
 
 

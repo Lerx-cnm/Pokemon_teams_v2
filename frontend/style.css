@@ -1,12 +1,27 @@
 .main {
     position:absolute;
   }
-  .header {
+.header {
     margin-top:3px;
     margin-left:10px;
     margin-bottom:2px;
   }
-  .container{
+.Grass:hover{
+  color: #00cc00;
+}
+.Water:hover{
+  color: #668cff;
+}
+.Fire:hover{
+  color: red;
+}
+.Electric:hover{
+  color: #b3b300;
+}
+.userteamlist:hover{
+  color: grey;
+}
+.container{
             position:relative;     
             bottom: 2800px;
             left:150%;
@@ -17,7 +32,7 @@
             box-shadow:4px 5px 10px;
             border-radius: 20px;
           }
-  .dex_num{
+.dex_num{
     position:relative;
     bottom: 66px;
     left:88%;
@@ -26,13 +41,35 @@
     color:black;
     font-size:20px;
   }
-  .picture{
+.picture{
     position:relative;
     text-align: center;
     left: 7%;
     border: 2px black;
   }
-  .button{
-      position:relative;
-      text-align: center;
-  }
+.myButton {
+    position:relative;
+    left:25%;
+	background-color:transparent;
+	border-radius:28px;
+    border:2px solid black;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-family:'Roboto', sans-serif;
+	font-size:24px;
+	padding:16px 31px;
+	text-decoration:none;
+    text-shadow:1px 1px 1px #2f6627;
+    
+}
+.myButton:hover {
+    background-color:black;
+    color: white;
+
+}
+.myButton:active {
+	position:relative;
+    top:1px;
+
+}
