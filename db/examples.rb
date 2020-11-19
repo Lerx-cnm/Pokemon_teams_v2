@@ -110,10 +110,10 @@
     Poison:{
     "023": "Ekans",
     "024": "Arbok",
-    "029": "Nidoran♀",
+    "029": "Nidoran",
     "030": "Nidorina",
     "031": "Nidoqueen",
-    "032": "Nidoran♂",
+    "032": "Nidoran",
     "033": "Nidorino",
     "034": "Nidoking",
     "041": "Zubat",
