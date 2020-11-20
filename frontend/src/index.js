@@ -112,6 +112,24 @@ function selectBackground(type){
     else if(type === "Poison"){
         div.style.backgroundImage = 'radial-gradient(circle at top right, #7733ff, #800080)';
     }
+    else if(type === "Ice"){
+        div.style.backgroundImage = 'radial-gradient(circle at bottom left, #ccffff, #00b386)';
+    }
+    else if(type === "Rock"){
+        div.style.backgroundImage = 'linear-gradient(to bottom, #cc9900, #b38600, #805500)';
+    }
+    else if(type === "Psychic"){
+        div.style.backgroundImage = 'linear-gradient(to bottom left, #ff6666, #ffcc99, #ff9966)';
+    }
+    else if(type === "Electric"){
+        div.style.backgroundImage = 'linear-gradient(to bottom right, #b3b300, #cccc00, #666600)';
+    }
+    else if(type === "Ground"){
+
+    }
+    else if(type === "Normal"){
+        
+    }
 }
 
 function addButtonListener(json){

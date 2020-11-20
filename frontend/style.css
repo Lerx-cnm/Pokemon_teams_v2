@@ -18,6 +18,39 @@
 .Electric:hover{
   color: #b3b300;
 }
+.Poison:hover{
+    color: #cc0066;
+}
+.Ghost:hover{
+    color: #cc00cc;
+}
+.Normal:hover{
+    color: #ffbf80;
+}
+.Flying:hover{
+    color: #006666;
+}
+.Ground:hover{
+    color: #996633;
+}
+.Rock:hover{
+    color: #cc9900;
+}
+.Bug:hover{
+    color: #336600 
+}
+.Dragon:hover{
+    color: #666699;
+}
+.Fighting:hover{
+    color: #e63900;
+}
+.Ice:hover{
+    color: #33cccc;
+}
+.Psychic:hover{
+    color: #ff4d4d;
+}
 .userteamlist:hover{
   color: grey;
 }
