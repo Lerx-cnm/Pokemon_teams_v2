@@ -51,11 +51,16 @@ function createDomelements(e) {
         document.querySelector('.container').innerHTML = ""
 
         let h2 = document.createElement("h2");
-        let type = document.createElement("p")
+        let type = document.createElement("p");
         let dex = document.createElement("p");
         let pic = document.createElement('img');
         let button = document.createElement('button');
+        let teamButton = document.createElement('button');
 
+
+
+        teamButton.textContent = "<- Back to Team"
+        teamButton.className = 'myButton3'
         h2.textContent = json["name"];
         h2.className = 'header'
         type.textContent = `Type: ${json["pok_type"]}`;
@@ -79,6 +84,7 @@ function createDomelements(e) {
             div.appendChild(button);
             selectBackground(json["pok_type"])
             addButtonListener(json)
+            teamCheck()
         }
     }) 
 }
@@ -142,9 +148,9 @@ function addButtonListener(json){
         document.getElementById(pokemon.dex_num).hidden = true;
         document.getElementsByClassName('container')[0].innerHTML = ""
         team.innerHTML += `<li id=${pokemon.dex_num} class=userteamlist>${pokemon.name}</li>`
-        pokemon.weaknesses
         removeListener(pokemon.dex_num)
-        addTeamButton()
+        storeTeam(pokemon)
+        addTeamButton(pokemon)
         }else{
             alert("You have reached the max limit of 3 Pokemon")
         }
@@ -161,21 +167,50 @@ function removeListener(pokemon){
     })
 }
 
-function addTeamButton(){
-    let button = document.createElement('button')
-    button.className = 'teambutton'
-    button.textContent = "Submit Team"
-    if(!document.getElementsByClassName('teambutton')[0]){
-    document.getElementById('title').appendChild(button)
+function addTeamButton(pokemon){
+    if(document.getElementsByClassName('userteamlist').length === 3){
+      let div = document.getElementsByClassName('container')[0]
+      div.innerHTML = "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button class=myButton2>Submit</button>";
+      div.style.backgroundColor = 'white';
+    }else{
     }
+    // let button = document.createElement('button')
+    // button.className = 'teambutton'
+    // button.textContent = "Submit Team"
+    // if(!document.getElementsByClassName('teambutton')[0]){
+    // document.getElementById('title').appendChild(button)
+    // }
 
-    button.addEventListener('click', () => {
-        if(document.getElementsByClassName('userteamlist').length < 3){
-            alert("Please select three pokemon")
-        }else{
-           alert("I worked")     
-        }
-    })
+    // button.addEventListener('click', () => {
+    //     if(document.getElementsByClassName('userteamlist').length < 3){
+    //         alert("Please select three pokemon")
+    //     }else{
+    //         createTeam()
+    //     }
+    // })
+}
+
+array_pok = []
+
+function storeTeam(pokemon){
+    array_pok.push(pokemon)
+}
+
+function createTeam(){
+
+    let team = new Team(array_pok[0], array_pok[1], array_pok[2], name);
+    teamDOMelements(team)
+}
+
+function teamDOMelements(team){
+    
+}
+
+function teamCheck(){
+    if(document.getElementsByClassName('userteamlist') === 3){
+        document.querySelector('.container').appendChild(teamButton);
+        debugger
+    }
 }
   
 
