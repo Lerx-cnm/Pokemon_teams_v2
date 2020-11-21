@@ -180,7 +180,15 @@ function addTeamButton(pokemon){
     let team_button;
     if(document.getElementsByClassName('userteamlist').length === 3){
       let div = document.getElementsByClassName('container')[0]
+      let pic = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/`
       div.innerHTML = ""
+      div.innerHTML += 
+      `<h1 class = header1>${array_pok[0].name}</h1> 
+      <img class= picture1 src=${pic}${("000" + array_pok[0].dex_num).slice(-3)}.png>
+      <h1 class=header1>${array_pok[1].name}</h1> 
+      <img class= picture1 src=${pic}${("000" + array_pok[1].dex_num).slice(-3)}.png>
+      <h1 class= header1>${array_pok[2].name}</h1>
+      <img class= picture1 src=${pic}${("000" + array_pok[2].dex_num).slice(-3)}.png>`
       div.innerHTML += "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button class=myButton2>Submit</button>";
       div.style.backgroundColor = 'white';
       team_button = document.getElementsByClassName('myButton2')[0]
@@ -188,6 +196,7 @@ function addTeamButton(pokemon){
         if(document.getElementsByClassName('userteamlist').length < 3){
             alert("Please select three pokemon")
         }else{
+            teamDOMelements()
             createTeam()
         }
     })
@@ -215,19 +224,24 @@ function storeTeam(pokemon, boo){
 }
 
 function createTeam(){
-    debugger
-    let team = new Team(array_pok[0], array_pok[1], array_pok[2], name);
-    teamDOMelements(team)
+    document.getElementsByClassName('myButton2')[0].addEventListener('click', ()=>{
+      let name = document.getElementById('pok_text').value
+      let team = new Team(array_pok[0], array_pok[1], array_pok[2], name);
+      showResults()
+    });
 }
 
-function teamDOMelements(team){
-    
+function teamDOMelements(){
 }
 
 function teamCheck(){
     if(document.getElementsByClassName('userteamlist') === 3){
         document.querySelector('.container').appendChild(teamButton);
     }
+}
+
+function showResults(){
+
 }
   
 
