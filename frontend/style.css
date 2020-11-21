@@ -9,7 +9,7 @@
   .text_field{
     position: relative;
     top: 440px;
-    left: 30%;
+    left: 20%;
     font-size: 20px;
     font-family:'Roboto', sans-serif;
 
@@ -134,4 +134,25 @@
 .myButton2:hover{
   background-color:black;
   color: white;
+}
+.myButton3{
+  position:relative;
+  right:5%;
+  top: 25px;
+  background-color:transparent;
+  border-radius:28px;
+  border:2px white;
+  display:inline-block;
+  cursor:pointer;
+  color:black;
+  font-family:'Roboto', sans-serif;
+  font-size:18px;
+  padding:16px 31px;
+  font-weight: bold;
+  text-shadow:0px 1px 0px white;
+}
+.myButton3:hover{
+  color: white;
+  text-shadow: 0px 1px 0px black;
+
 }

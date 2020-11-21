@@ -34,6 +34,7 @@ function addListenersToNode() {
         node.addEventListener("click", createDomelements)
     })
 
+
 }
 
 function createDomelements(e) {
@@ -88,7 +89,7 @@ function createDomelements(e) {
         }
     }) 
 }
-
+array_pok = []
 function selectBackground(type){
     let div = document.querySelector('.container')
     if(type === "Grass"){
@@ -139,6 +140,13 @@ function selectBackground(type){
 }
 
 function addButtonListener(json){
+    if(document.querySelectorAll('.userteamlist').length === 3){
+        document.getElementsByClassName('container')[0].innerHTML += "<button class=myButton3 id=teambutton> <-Back to Team </button>"
+        document.getElementById('teambutton').addEventListener('click', () => {
+            addTeamButton()
+            console.log('working')
+        });
+    }
     let button = document.getElementsByClassName('myButton')
     let team = document.getElementById('userlist')
     let teamlist = document.getElementsByClassName('userteamlist')
@@ -148,7 +156,7 @@ function addButtonListener(json){
         document.getElementById(pokemon.dex_num).hidden = true;
         document.getElementsByClassName('container')[0].innerHTML = ""
         team.innerHTML += `<li id=${pokemon.dex_num} class=userteamlist>${pokemon.name}</li>`
-        removeListener(pokemon.dex_num)
+        removeListener(pokemon)
         storeTeam(pokemon)
         addTeamButton(pokemon)
         }else{
@@ -159,7 +167,8 @@ function addButtonListener(json){
 
 function removeListener(pokemon){
     document.querySelectorAll(".userteamlist").forEach(node => {
-        node.addEventListener("click", () => {
+        node.addEventListener("click", (e) => {
+            storeTeam(node.id, 'false')
             node.remove()
             document.getElementById(node.id).hidden = false;
             
@@ -168,36 +177,45 @@ function removeListener(pokemon){
 }
 
 function addTeamButton(pokemon){
+    let team_button;
     if(document.getElementsByClassName('userteamlist').length === 3){
       let div = document.getElementsByClassName('container')[0]
-      div.innerHTML = "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button class=myButton2>Submit</button>";
+      div.innerHTML = ""
+      div.innerHTML += "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button class=myButton2>Submit</button>";
       div.style.backgroundColor = 'white';
-    }else{
+      team_button = document.getElementsByClassName('myButton2')[0]
+      team_button.addEventListener('click', () => {
+        if(document.getElementsByClassName('userteamlist').length < 3){
+            alert("Please select three pokemon")
+        }else{
+            createTeam()
+        }
+    })
     }
-    // let button = document.createElement('button')
-    // button.className = 'teambutton'
-    // button.textContent = "Submit Team"
-    // if(!document.getElementsByClassName('teambutton')[0]){
-    // document.getElementById('title').appendChild(button)
-    // }
 
-    // button.addEventListener('click', () => {
-    //     if(document.getElementsByClassName('userteamlist').length < 3){
-    //         alert("Please select three pokemon")
-    //     }else{
-    //         createTeam()
-    //     }
-    // })
+
+      console.log(team_button)
+    
 }
 
-array_pok = []
 
-function storeTeam(pokemon){
-    array_pok.push(pokemon)
+
+function storeTeam(pokemon, boo){
+    if(boo === 'false'){
+        if(array_pok[0].dex_num == pokemon){
+            array_pok.shift()
+        }else if(array_pok[1] && array_pok[1].dex_num == pokemon){
+            array_pok.splice(1,1)
+        }else{
+            array_pok.pop()
+        }
+    }else{
+      array_pok.push(pokemon)
+    }
 }
 
 function createTeam(){
-
+    debugger
     let team = new Team(array_pok[0], array_pok[1], array_pok[2], name);
     teamDOMelements(team)
 }
@@ -209,7 +227,6 @@ function teamDOMelements(team){
 function teamCheck(){
     if(document.getElementsByClassName('userteamlist') === 3){
         document.querySelector('.container').appendChild(teamButton);
-        debugger
     }
 }
   
