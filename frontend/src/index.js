@@ -246,7 +246,7 @@ function showResults(team){
     <button class=myButton3 id=team_edit><- Edit Team name</button>`
 
     document.querySelector('#team_edit').addEventListener('click', () =>{
-        if(document.querySelectorAll('.userteamlist') === 3){
+        if(document.querySelectorAll('.userteamlist').length === 3){
             addTeamButton()
         }else{
             alert("Please select at least three Pokemon")
