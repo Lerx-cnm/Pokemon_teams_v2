@@ -3,21 +3,30 @@ class Pokemon{
         this.name = name;
         this.type = type;
         this.dex_num = dex_num;
+        this.weaknesses()
+        this.strengths()
     }
 
-    get weaknesses(){
+    weaknesses(){
         let array = [];
         fetch(`http://localhost:3000/weakness/${this.type}`)
         .then(response => response.json())
         .then(json => {
             array.push(json.weak1);
             array.push(json.weak2);
-            document.getElementById(this.dex_num).innerHTML += "   =>   " + array
+            this.weakness = array;
         })
     }
 
-    get strengths(){
-        return this.strengthlist();
+    strengths(){
+        let array =[];
+        fetch(`http://localhost:3000/strength/${this.type}`)
+        .then(response => response.json())
+        .then(json =>{
+            array.push(json.stre1)
+            array.push(json.stre2)
+            this.strength =array;
+        })
     }
 }
 

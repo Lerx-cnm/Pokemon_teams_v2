@@ -1,7 +1,6 @@
 class PokemonController < ApplicationController
     def index
         pokemons = Pokemon.all 
-        # binding.pry
         render json: pokemons.to_json(only: [:name, :dex_num, :pok_type])
     end
 

@@ -199,7 +199,6 @@ function addTeamButton(pokemon){
         if(document.getElementsByClassName('userteamlist').length < 3){
             alert("Please select three pokemon")
         }else{
-            teamDOMelements()
             createTeam()
         }
     })
@@ -228,8 +227,6 @@ function createTeam(){
       showResults(team)
 }
 
-function teamDOMelements(){
-}
 
 function teamCheck(){
     if(document.getElementsByClassName('userteamlist') === 3){
@@ -238,9 +235,19 @@ function teamCheck(){
 }
 
 function showResults(team){
-    console.log(team.name)
-    console.log(team._pok1.name)
-    console.log(team._pok2.name)
+    document.querySelector('.container').innerHTML = `
+    <h1 class=header1 style=font-size:32px>Team: ${team.name}</h1>
+    <h1 class=header1 style=font-size:20px>Pokemon:</h1>
+    <p style= text-align:center;font-size:18px>${team.poklist}</p>
+    <h1 class=header1 style=font-size:20px>Weaknesses:</h1>
+    <p style= text-align:center;font-size:18px>${team.weaklist}</p>
+    <h1 class=header1 style=font-size:20px>Strengths:</h1>
+    <p style= text-align:center;font-size:18px>${team.strengthlist}</p>
+    <button class=myButton3 id=team_edit><- Edit Team name</button>`
+
+    document.querySelector('#team_edit').addEventListener('click', () =>{
+        addTeamButton()
+    })
 }
   
 
