@@ -132,10 +132,13 @@ function selectBackground(type){
         div.style.backgroundImage = 'linear-gradient(to bottom right, #b3b300, #cccc00, #666600)';
     }
     else if(type === "Ground"){
-
+        div.style.backgroundImage = 'linear-gradient(to bottom right, #997300, #666633, #734d26)';
     }
     else if(type === "Normal"){
-        
+        div.style.backgroundImage = 'linear-gradient(to top, #999966, #669999)';
+    }
+    else if(type === "Team"){
+        div.style.backgroundImage = 'linear-gradient(to bottom, #0066ff, #ff3333, #00b359)';
     }
 }
 
@@ -144,7 +147,6 @@ function addButtonListener(json){
         document.getElementsByClassName('container')[0].innerHTML += "<button class=myButton3 id=teambutton> <-Back to Team </button>"
         document.getElementById('teambutton').addEventListener('click', () => {
             addTeamButton()
-            console.log('working')
         });
     }
     let button = document.getElementsByClassName('myButton')
@@ -179,6 +181,7 @@ function removeListener(pokemon){
 function addTeamButton(pokemon){
     let team_button;
     if(document.getElementsByClassName('userteamlist').length === 3){
+      selectBackground("Team")
       let div = document.getElementsByClassName('container')[0]
       let pic = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/`
       div.innerHTML = ""
@@ -189,7 +192,7 @@ function addTeamButton(pokemon){
       <img class= picture1 src=${pic}${("000" + array_pok[1].dex_num).slice(-3)}.png>
       <h1 class= header1>${array_pok[2].name}</h1>
       <img class= picture1 src=${pic}${("000" + array_pok[2].dex_num).slice(-3)}.png>`
-      div.innerHTML += "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button class=myButton2>Submit</button>";
+      div.innerHTML += "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button id = teambutton2 class=myButton2>Submit</button>";
       div.style.backgroundColor = 'white';
       team_button = document.getElementsByClassName('myButton2')[0]
       team_button.addEventListener('click', () => {
@@ -200,11 +203,7 @@ function addTeamButton(pokemon){
             createTeam()
         }
     })
-    }
-
-
-      console.log(team_button)
-    
+    }    
 }
 
 
@@ -224,11 +223,9 @@ function storeTeam(pokemon, boo){
 }
 
 function createTeam(){
-    document.getElementsByClassName('myButton2')[0].addEventListener('click', ()=>{
       let name = document.getElementById('pok_text').value
       let team = new Team(array_pok[0], array_pok[1], array_pok[2], name);
-      showResults()
-    });
+      showResults(team)
 }
 
 function teamDOMelements(){
@@ -240,8 +237,10 @@ function teamCheck(){
     }
 }
 
-function showResults(){
-
+function showResults(team){
+    console.log(team.name)
+    console.log(team._pok1.name)
+    console.log(team._pok2.name)
 }
   
 
