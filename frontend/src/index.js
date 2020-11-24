@@ -1,8 +1,3 @@
-/*fetch('http://localhost:3000/pokemon/150')
-.then(response => response.json())
-.then(json => document.getElementById('pokemon').innerHTML= `${json.name} ${json.pok_type} ${json.dex_num}
-</br><img src='https://img.pokemondb.net/sprites/bank/normal/${json.name.toLowerCase()}.png' alt=${json.name}>`);*/
-
 document.addEventListener("DOMContentLoaded", event => {
     fetchPokemon()
 });
@@ -16,17 +11,13 @@ function fetchPokemon() {
     });
 }
 
-
 function displayPokemon(pokemonArr) {
+    
+    console.log(pokemonArr)
       pokemonArr.forEach(json => { 
           document.getElementById('pokelist').innerHTML += `<li id=${json.dex_num} class=${json.pok_type}>${json.name}</li>`
       })
       addListenersToNode()
-      createMenu()
-}
-
-function createMenu(){
-
 }
 
 function addListenersToNode() {
@@ -38,17 +29,9 @@ function addListenersToNode() {
 }
 
 function createDomelements(e) {
-    // might want to create a Div with images and info in there?
-//     let button = document.createElement("button")
-//    let container =  document.getElementById("container")
-//    container.append(button)
-    // document.getElementById("container").innerHTML += "<button> </button>"
     fetch(`http://localhost:3000/pokemon/${e.target.id}`)
     .then(response => response.json())
     .then(json => {
-
-
-
         document.querySelector('.container').innerHTML = ""
 
         let h2 = document.createElement("h2");
@@ -57,7 +40,6 @@ function createDomelements(e) {
         let pic = document.createElement('img');
         let button = document.createElement('button');
         let teamButton = document.createElement('button');
-
 
 
         teamButton.textContent = "<- Back to Team"
@@ -154,7 +136,9 @@ function addButtonListener(json){
     let teamlist = document.getElementsByClassName('userteamlist')
     button[0].addEventListener('click', () => {
         if(teamlist.length != 3 ){
-        let pokemon = new Pokemon(json.name, json.pok_type, json.dex_num)
+        let pokemon = new Pokemon(json.name, json.pok_type, json.dex_num, json.weaknesses, json.strengths)
+        console.log(pokemon)
+        console.log(json)
         document.getElementById(pokemon.dex_num).hidden = true;
         document.getElementsByClassName('container')[0].innerHTML = ""
         team.innerHTML += `<li id=${pokemon.dex_num} class=userteamlist>${pokemon.name}</li>`
@@ -173,7 +157,6 @@ function removeListener(pokemon){
             storeTeam(node.id, 'false')
             node.remove()
             document.getElementById(node.id).hidden = false;
-            
         })
     })
 }
@@ -194,17 +177,31 @@ function addTeamButton(pokemon){
       <img class= picture1 src=${pic}${("000" + array_pok[2].dex_num).slice(-3)}.png>`
       div.innerHTML += "<input placeholder=TeamName type=text id=pok_text class=text_field><br><button id = teambutton2 class=myButton2>Submit</button>";
       div.style.backgroundColor = 'white';
+
+
       team_button = document.getElementsByClassName('myButton2')[0]
       team_button.addEventListener('click', () => {
         if(document.getElementsByClassName('userteamlist').length < 3){
             alert("Please select three pokemon")
         }else{
-            createTeam()
+            sendTeam()
         }
     })
     }    
 }
 
+function sendTeam() {
+    let name = document.getElementById('pok_text').value
+    let obj = {pok1: array_pok[0], pok2: array_pok[1], pok3: array_pok[2], name: name}
+    fetch('http://localhost:3000/team', {method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(obj)
+    })
+    .then(response => response.json())
+    .then(json =>{
+        createTeam(json)
+    })
+}
 
 
 function storeTeam(pokemon, boo){
@@ -221,9 +218,8 @@ function storeTeam(pokemon, boo){
     }
 }
 
-function createTeam(){
-      let name = document.getElementById('pok_text').value
-      let team = new Team(array_pok[0], array_pok[1], array_pok[2], name);
+function createTeam(json){
+      let team = new Team(json.pok1, json.pok2, json.pok3, json.name, json.id);
       showResults(team)
 }
 
@@ -243,7 +239,8 @@ function showResults(team){
     <p style= text-align:center;font-size:18px>${team.weaklist}</p>
     <h1 class=header1 style=font-size:20px>Strengths:</h1>
     <p style= text-align:center;font-size:18px>${team.strengthlist}</p>
-    <button class=myButton3 id=team_edit><- Edit Team name</button>`
+    <button class=myButton3 id=team_edit><- Edit Team name</button>
+    <button class=myButton4 id=team_destroy>Restart</button>`
 
     document.querySelector('#team_edit').addEventListener('click', () =>{
         if(document.querySelectorAll('.userteamlist').length === 3){
@@ -252,7 +249,17 @@ function showResults(team){
             alert("Please select at least three Pokemon")
         }
     })
-}
+
+    document.getElementById('team_destroy').addEventListener('click', () =>{
+        fetch(`http://localhost:3000/team/${team.id}`, {method: 'DELETE', headers: {'Content-Type': 'application/json'}})
+        document.querySelectorAll(".userteamlist").forEach(node => {
+                storeTeam(node.id, 'false')
+                node.remove()
+                document.getElementById(node.id).hidden = false;
+      })
+    })
+  }
+
   
 
 

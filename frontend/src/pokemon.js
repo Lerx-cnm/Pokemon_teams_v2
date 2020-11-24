@@ -1,32 +1,13 @@
 class Pokemon{
-    constructor(name, type, dex_num){
+    constructor(name, type, dex_num, weaknesses, strengths){
         this.name = name;
         this.type = type;
         this.dex_num = dex_num;
-        this.weaknesses()
-        this.strengths()
+        this.weaknesses = weaknesses;
+        this.strengths = strengths;
+        Pokemon.all.push(this);
     }
-
-    weaknesses(){
-        let array = [];
-        fetch(`http://localhost:3000/weakness/${this.type}`)
-        .then(response => response.json())
-        .then(json => {
-            array.push(json.weak1);
-            array.push(json.weak2);
-            this.weakness = array;
-        })
-    }
-
-    strengths(){
-        let array =[];
-        fetch(`http://localhost:3000/strength/${this.type}`)
-        .then(response => response.json())
-        .then(json =>{
-            array.push(json.stre1)
-            array.push(json.stre2)
-            this.strength =array;
-        })
-    }
+    static all = []
 }
+
 

@@ -3,9 +3,10 @@ class CreatePokemonTable < ActiveRecord::Migration[5.0]
         create_table :pokemons do |t|
             t.string :name
             t.string :pok_type
+            t.string :weaknesses
+            t.string :strengths
             t.integer :dex_num
-            t.integer :weakness_id
-            t.integer :strength_id
+            t.integer :team_id
             
             t.timestamps
         end

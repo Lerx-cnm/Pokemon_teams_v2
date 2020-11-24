@@ -9,24 +9,16 @@ require_relative 'examples'
 require_relative 'weak_strength'
 
 Pokemon.destroy_all
-Weakness.destroy_all
-Strength.destroy_all
 
 
-@weakhash.each do |k, v|
-  Weakness.create(main_type: k, weak1: v[0], weak2: v[1])
-end
 
-@strengthash.each do |k, v|
-  Strength.create(main_type: k, stre1: v[0], stre2: v[1])
-end
 
 
 def create_poke(hash, type)
     hash.each do |k, v|
-      weak = Weakness.find_by(main_type: type)
-      strength = Strength.find_by(main_type: type)
-      poke = Pokemon.new(name: v, pok_type: type, dex_num: k.to_s.to_i, weakness_id: weak.id, strength_id: strength.id)
+      weak = @weakhash[type.to_sym].join(', ')
+      strength = @strengthash[type.to_sym].join(', ')
+      poke = Pokemon.new(name: v, pok_type: type, dex_num: k.to_s.to_i, weaknesses: weak, strengths: strength)
       poke.save
     end
 end
