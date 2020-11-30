@@ -256,6 +256,7 @@ function showResults(team){
                 storeTeam(node.id, 'false')
                 node.remove()
                 document.getElementById(node.id).hidden = false;
+                document.getElementsByClassName('container')[0].innerHTML = ""
       })
     })
   }
