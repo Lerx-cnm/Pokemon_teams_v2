@@ -12,8 +12,6 @@ function fetchPokemon() {
 }
 
 function displayPokemon(pokemonArr) {
-    
-    console.log(pokemonArr)
       pokemonArr.forEach(json => { 
           document.getElementById('pokelist').innerHTML += `<li id=${json.dex_num} class=${json.pok_type}>${json.name}</li>`
       })
@@ -26,6 +24,20 @@ function addListenersToNode() {
     })
 
 
+}
+
+function pokSearch(){
+    let e = document.getElementById('pok_search').value
+    e.toLowerCase()
+    let list = document.getElementsByTagName('li');
+    for(i = 0; i < list.length; i++){
+        if(!list[i].innerHTML.toLowerCase().includes(e)){
+        list[i].hidden = true
+        }
+        else{
+            list[i].hidden = false
+        }
+    }
 }
 
 function createDomelements(e) {
@@ -71,7 +83,7 @@ function createDomelements(e) {
         }
     }) 
 }
-array_pok = []
+let array_pok = []
 function selectBackground(type){
     let div = document.querySelector('.container')
     if(type === "Grass"){
@@ -137,8 +149,6 @@ function addButtonListener(json){
     button[0].addEventListener('click', () => {
         if(teamlist.length != 3 ){
         let pokemon = new Pokemon(json.name, json.pok_type, json.dex_num, json.weaknesses, json.strengths)
-        console.log(pokemon)
-        console.log(json)
         document.getElementById(pokemon.dex_num).hidden = true;
         document.getElementsByClassName('container')[0].innerHTML = ""
         team.innerHTML += `<li id=${pokemon.dex_num} class=userteamlist>${pokemon.name}</li>`

@@ -5,9 +5,10 @@
   <link rel='stylesheet' href='style.css'>
 </head>
 <header>
-  <label>Choose a Pokemon Type:</label>
-  <select name = 'Pokemon_Type' id='pokemon_type'>
-  </select>
+  <script src= 'src/team.js'></script>
+  <script src='src/pokemon.js'></script>
+  <script src='src/index.js'></script>
+  <input type='text' id='pok_search' onkeyup='pokSearch()'>
 </header>
 <div class = 'main'><h2 class='header' id='title'>Your current team:</h2>
   <ul style= 'list-style-type: none' id='userlist'></ul>
@@ -19,9 +20,7 @@
   <div class="container">
   </div>
 </div>
-<script src= 'src/team.js'></script>
-<script src='src/pokemon.js'></script>
-<script src='src/index.js'></script>
+
 
 
 
