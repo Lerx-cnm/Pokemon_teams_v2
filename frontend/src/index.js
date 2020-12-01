@@ -28,7 +28,8 @@ function addListenersToNode() {
 
 function pokSearch(){
     let e = document.getElementById('pok_search').value
-    e.toLowerCase()
+    e = e.toLowerCase()
+    // debugger
     let list = document.getElementsByTagName('li');
     for(i = 0; i < list.length; i++){
         if(!list[i].innerHTML.toLowerCase().includes(e)){
@@ -37,6 +38,8 @@ function pokSearch(){
         else{
             list[i].hidden = false
         }
+        debugger
+        document.getElementsByClassName('container')[0].hidden = false
     }
 }
 
